@@ -95,7 +95,6 @@ resource "aws_eip" "nat_eip" {
 resource "aws_nat_gateway" "natgw" {
   allocation_id = "${aws_eip.nat_eip.id}"
   subnet_id     = "${element(aws_subnet.public_subnet.*.id, 1)}"
-
   depends_on = ["aws_internet_gateway.igw"]
 }
 
@@ -197,7 +196,7 @@ resource "aws_instance" "gemfire_server_2" {
 resource "aws_security_group" "allow_ssh_default" {
   name        = "allow ssh"
   description = "only ssh"
-
+  vpc_id = "vpc-000a1d15e6b5c61cf"
   ingress {
     from_port   = 22
     to_port     = 22

@@ -154,6 +154,11 @@ resource "aws_instance" "gemfire_server" {
   ami           = "ami-02045ebddb047018b"
   instance_type = "t2.micro"
   key_name      = "ec2-key"
+  security_groups = ["${aws_security_group.allow_ssh.name}"]
+  subnet_id = "${aws_subnet.public_subnet.id}"
+  vpc_security_group_ids = [
+    aws_security_group.allow_ssh.id
+  ]
   tags = {
     Name = var.ec2_name
   }
@@ -162,6 +167,7 @@ resource "aws_instance" "gemfire_server" {
 resource "aws_security_group" "allow_ssh" {
   name        = "allow ssh"
   description = "only ssh"
+  vpc_id = "${aws_vpc.main.id}"
 
   ingress {
     from_port   = 22

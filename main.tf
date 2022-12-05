@@ -154,7 +154,7 @@ resource "aws_instance" "gemfire_server" {
   ami           = "ami-02045ebddb047018b"
   instance_type = "t2.micro"
   key_name      = "ec2-key"
-  security_groups = ["${aws_security_group.allow_ssh.name}"]
+  security_groups = ["${aws_security_group.allow_ssh.id}"]
   subnet_id = "${element(aws_subnet.public_subnet.*.id, 1)}"
   vpc_security_group_ids = [
     aws_security_group.allow_ssh.id

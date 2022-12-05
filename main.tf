@@ -188,6 +188,7 @@ resource "aws_instance" "gemfire_server_2" {
   ami           = "ami-02045ebddb047018b"
   instance_type = "t2.micro"
   key_name      = "ec2-key"
+  security_groups = ["${aws_security_group.allow_ssh.id}"]
   tags = {
     Name = "gemfire_server_2"
   }

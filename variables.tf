@@ -31,3 +31,8 @@ variable "bastion_host_public_key" {
   description = "Bastion host public key"
   default = "~/.ssh/id_rsa.pub"
 }
+
+variable "ec2_name" {
+  description = "ec2 name"
+  default = "Gem_Fire"
+}

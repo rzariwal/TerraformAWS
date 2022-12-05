@@ -149,3 +149,31 @@ resource "aws_route_table_association" "database_rt_association" {
   subnet_id      = "${element(aws_subnet.database_subnet.*.id, count.index)}"
   route_table_id = "${aws_route_table.database_route_table.id}"
 }
+
+resource "aws_instance" "gemfire_server" {
+  ami           = "ami-02045ebddb047018b"
+  instance_type = "t2.micro"
+  key_name      = "ec2-key"
+  tags = {
+    Name = var.ec2_name
+  }
+}
+
+resource "aws_security_group" "allow_ssh" {
+  name        = "allow ssh"
+  description = "only ssh"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+}

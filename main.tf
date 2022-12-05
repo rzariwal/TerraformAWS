@@ -196,7 +196,7 @@ resource "aws_instance" "gemfire_server_2" {
 resource "aws_security_group" "allow_ssh_default" {
   name        = "allow ssh"
   description = "only ssh"
-  vpc_id = "vpc-000a1d15e6b5c61cf"
+  vpc_id = "vpc-0ccd16672c8189087"
   ingress {
     from_port   = 22
     to_port     = 22

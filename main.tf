@@ -188,8 +188,27 @@ resource "aws_instance" "gemfire_server_2" {
   ami           = "ami-02045ebddb047018b"
   instance_type = "t2.micro"
   key_name      = "ec2-key"
-  security_groups = ["${aws_security_group.allow_ssh.id}"]
+  security_groups = ["${aws_security_group.allow_ssh_default.id}"]
   tags = {
     Name = "gemfire_server_2"
+  }
+}
+
+resource "aws_security_group" "allow_ssh_default" {
+  name        = "allow ssh"
+  description = "only ssh"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
   }
 }

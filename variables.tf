@@ -26,3 +26,8 @@ variable "database_subnet_cidr_block" {
   description = "Database Subnet CIDR Block"
   default = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
 }
+
+variable "bastion_host_public_key" {
+  description = "Bastion host public key"
+  default = "~/.ssh/id_rsa.pub"
+}
